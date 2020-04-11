@@ -10,8 +10,11 @@ import {
   FormControl,
   Button,
 } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { createStream } from '../../actions';
 
 const StreamCreate = props => {
+  const dispatch = useDispatch();
   const { handleSubmit } = props;
 
   const renderError = ({ error, touched }) => {
@@ -41,7 +44,7 @@ const StreamCreate = props => {
   };
 
   const onFormSubmit = formValues => {
-    console.log(formValues);
+    dispatch(createStream(formValues));
   };
 
   return (
