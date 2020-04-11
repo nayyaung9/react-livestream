@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function AppWraper() {
+export default function AppWraper({ children }) {
   const classes = useStyles();
 
   return (
@@ -39,6 +40,7 @@ export default function AppWraper() {
           <GoogleAuth />
         </Toolbar>
       </AppBar>
+      {children}
     </div>
   );
 }
