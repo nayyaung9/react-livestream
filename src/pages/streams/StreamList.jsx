@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AppWraper from '../../components/AppWraper';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStreams } from '../../actions';
+import { fetchStreams, deleteStream } from '../../actions';
 import { Container, Paper, Grid, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,10 @@ const StreamList = () => {
   const authUserId = useSelector(state => state.auth.userId);
   const isAuth = useSelector(state => state.auth.isSignedIn);
   const streams = Object.values(state);
+
+  const onItemDelete = streamId => {
+    dispatch(deleteStream(streamId));
+  };
 
   useEffect(() => {
     dispatch(fetchStreams());
@@ -33,7 +37,10 @@ const StreamList = () => {
               Edit
             </Button>
           </Link>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => onItemDelete(stream.id)}>
             Delete
           </Button>
         </div>
