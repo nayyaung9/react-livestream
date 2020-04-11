@@ -2,7 +2,14 @@ import React, { useEffect } from 'react';
 import AppWraper from '../../components/AppWraper';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStreams, deleteStream } from '../../actions';
-import { Container, Paper, Grid, Typography, Button } from '@material-ui/core';
+import {
+  Container,
+  Paper,
+  Grid,
+  Typography,
+  Button,
+  Avatar,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const StreamList = () => {
@@ -52,6 +59,7 @@ const StreamList = () => {
     return streams.map(stream => {
       return (
         <Paper key={stream.id} style={{ padding: 10, boxShadow: 'none' }}>
+          <Avatar src={stream.user.avatar_url} />
           <Grid container spacing={3}>
             <Grid item xs={12} sm={8}>
               <Link

@@ -3,6 +3,7 @@ import history from '../history';
 import {
   SIGN_IN,
   SIGN_OUT,
+  GET_AUTH_USER,
   CREATE_STREAM,
   FETCH_STREAMS,
   FETCH_SINGLE_STREAM,
@@ -22,9 +23,17 @@ export const signOut = () => {
   };
 };
 
+export const getAuthUser = user => async dispatch => {
+  dispatch({ type: GET_AUTH_USER, payload: user });
+};
+
 export const createStream = formValues => async (dispatch, getState) => {
-  const { userId } = getState().auth;
-  const response = await streams.post('/streams', { ...formValues, userId });
+  const { user } = getState().auth;
+  const response = await streams.post('/streams', {
+    ...formValues,
+    userId: user.userId,
+    user,
+  });
 
   dispatch({ type: CREATE_STREAM, payload: response.data });
   history.push('/streams');

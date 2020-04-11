@@ -3,7 +3,7 @@ import React from 'react';
 import { loadCSS } from 'fg-loadcss';
 import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { signIn, signOut } from '../actions';
+import { signIn, signOut, getAuthUser } from '../actions';
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -18,6 +18,17 @@ class GoogleAuth extends React.Component {
           this.auth = window.gapi.auth2.getAuthInstance();
           this.onAuthChange(this.auth.isSignedIn.get());
           this.auth.isSignedIn.listen(this.onAuthChange);
+
+          const {
+            Ad: username,
+            QK: avatar_url,
+          } = this.auth.currentUser.get().Pt;
+          const payload = {
+            userId: this.auth.currentUser.get().getId(),
+            username,
+            avatar_url,
+          };
+          this.props.getAuthUser(payload);
         });
     });
     loadCSS(
@@ -69,4 +80,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   signIn,
   signOut,
+  getAuthUser,
 })(GoogleAuth);
