@@ -1,8 +1,16 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Typography,
+  IconButton,
+  Avatar,
+} from '@material-ui/core';
+import ContactlessIcon from '@material-ui/icons/Contactless';
+import { useSelector } from 'react-redux';
 import GoogleAuth from './GoogleAuth';
 
 const useStyles = makeStyles(theme => ({
@@ -19,27 +27,45 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  avatar: {
+    marginRight: 5,
+  },
+  username: {
+    marginRight: 10,
+  },
 }));
 
 export default function AppWraper({ children }) {
   const classes = useStyles();
+  const authUser = useSelector(state => state.auth.user);
+  const isAuth = useSelector(state => state.auth.isSignedIn);
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            React - livestream
-          </Typography>
-          <GoogleAuth />
-        </Toolbar>
+        <Container>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu">
+              <ContactlessIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              React - Live Streaming App
+            </Typography>
+            {isAuth ? (
+              <React.Fragment>
+                <Avatar src={authUser.avatar_url} className={classes.avatar} />
+                <Typography variant="body1" className={classes.username}>
+                  {authUser.username}
+                </Typography>
+              </React.Fragment>
+            ) : null}
+            <GoogleAuth />
+          </Toolbar>
+        </Container>
       </AppBar>
       {children}
     </div>

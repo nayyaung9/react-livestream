@@ -108,7 +108,7 @@ const StreamList = () => {
           direction="row"
           justify="space-between"
           alignItems="center">
-          <Typography variant="h4">Streaming</Typography>
+          <Typography variant="h4">Current Streaming</Typography>
           {renderButton()}
         </Grid>
         {renderStreams()}
