@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import Button from '@material-ui/core/Button';
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { loadCSS } from 'fg-loadcss';
+import { Button, Icon } from '@material-ui/core';
+import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
 
-const GoogleAuth = () => {
-  const dispatch = useDispatch();
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  useEffect(() => {
+class GoogleAuth extends React.Component {
+  componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client
         .init({
@@ -16,25 +15,58 @@ const GoogleAuth = () => {
           scope: 'email',
         })
         .then(() => {
-          let auth = window.gapi.auth2.getAuthInstance();
-          setIsSignedIn(auth.isSignedIn.get());
-          auth.isSignedIn.listen(onAuthChange);
+          this.auth = window.gapi.auth2.getAuthInstance();
+          this.onAuthChange(this.auth.isSignedIn.get());
+          this.auth.isSignedIn.listen(this.onAuthChange);
         });
     });
-  });
+    loadCSS(
+      'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
+      document.querySelector('#font-awesome-css')
+    );
+  }
 
-  const onAuthChange = isSignedIn => {
-    isSignedIn ? dispatch(signIn) : dispatch(signOut);
+  onAuthChange = isSignedIn => {
+    return isSignedIn
+      ? this.props.signIn(this.auth.currentUser.get().getId())
+      : this.props.signOut();
   };
 
-  const onSignIn = () => this.auth.signIn();
-  const onSignOut = () => this.auth.signOut();
+  onSignIn = () => this.auth.signIn();
+  onSignOut = () => this.auth.signOut();
 
-  const renderAuthStatus = () => {
-    return <Button>Sign in with Google</Button>;
-  };
+  renderAuthStatus() {
+    if (this.props.isSignedIn === null) {
+      return null;
+    } else if (this.props.isSignedIn === true) {
+      return (
+        <Button variant="outlined" color="inherit" onClick={this.onSignOut}>
+          Sign out
+        </Button>
+      );
+    } else {
+      return (
+        <Button variant="outlined" color="inherit" onClick={this.onSignIn}>
+          <Icon
+            className="fab fa-google"
+            style={{ fontSize: 18, paddingRight: 5 }}
+          />{' '}
+          Sign in with Google
+        </Button>
+      );
+    }
+  }
 
-  return renderAuthStatus();
+  render() {
+    return <div>{this.renderAuthStatus()}</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  return { isSignedIn: state.auth.isSignedIn };
 };
 
-export default GoogleAuth;
+export default connect(mapStateToProps, {
+  signIn,
+  signOut,
+})(GoogleAuth);
