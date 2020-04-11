@@ -4,12 +4,14 @@
 
 `http://localhost:3000/streams` <br />
 
-<img src="https://i.ibb.co/jgBB8rc/streams-List.png" alt="StreamList" width="100" height="100">
+<img src="https://i.ibb.co/cDLLJgL/92948603-219128799364124-8909167626937171968-n.png" alt="StreamList">
 <br/>
 
 `http://localhost:3000/stream/<random-id>` <br />
 
-<img src="https://i.ibb.co/kMGFLVW/Screenshot-from-2020-04-12-02-27-24.png" alt="Screenshot-from-2020-04-12-02-27-24"  width="100" height="100">
+<img src="https://i.ibb.co/Ptr82sf/Screenshot-from-2020-04-12-02-27-24.png">
+
+## Clone JSON-Server
 
 [https://github.com/nayyaung9/json-database-livestream](https://github.com/nayyaung9/json-database-livestream)
 
