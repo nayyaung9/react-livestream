@@ -26,12 +26,14 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    fontWeight: 'bold',
   },
   avatar: {
     marginRight: 5,
   },
   username: {
     marginRight: 10,
+    fontWeight: 'bold',
   },
 }));
 

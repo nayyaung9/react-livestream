@@ -59,7 +59,13 @@ const StreamList = () => {
     return streams.map(stream => {
       return (
         <Paper key={stream.id} style={{ padding: 10, boxShadow: 'none' }}>
-          <Avatar src={stream.user.avatar_url} />
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <Avatar src={stream.user.avatar_url} />
+            <Typography variant="h6" style={{ paddingLeft: 10 }}>
+              {stream.user.username}
+            </Typography>
+          </div>
+
           <Grid container spacing={3}>
             <Grid item xs={12} sm={8}>
               <Link
