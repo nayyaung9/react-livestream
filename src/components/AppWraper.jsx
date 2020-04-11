@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     backgroundColor: 'rgb(5, 31, 66)',
+    boxShadow: 'none',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -35,7 +36,7 @@ export default function AppWraper({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            React - livestream
           </Typography>
           <GoogleAuth />
         </Toolbar>
