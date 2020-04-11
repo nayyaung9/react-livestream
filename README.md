@@ -2,13 +2,16 @@
 
 > Before cloning this, please give a star for this repo if you are interested :)
 
-http://localhost:3000/streams <br />
+`http://localhost:3000/streams` <br />
 
-![Demo]('./public/images/demo0.png')
+<img src="https://i.ibb.co/jgBB8rc/streams-List.png" alt="StreamList" width="100" height="100">
+<br/>
 
-## Clone Json-server
+`http://localhost:3000/stream/<random-id>` <br />
 
-[https://github.com/nayyaung9/rtmp-server-livestream](https://github.com/nayyaung9/rtmp-server-livestream)
+<img src="https://i.ibb.co/kMGFLVW/Screenshot-from-2020-04-12-02-27-24.png" alt="Screenshot-from-2020-04-12-02-27-24"  width="100" height="100">
+
+[https://github.com/nayyaung9/json-database-livestream](https://github.com/nayyaung9/json-database-livestream)
 
 ### Install
 
