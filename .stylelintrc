@@ -1,0 +1,10 @@
+{
+  "plugins": [
+      "stylelint-prettier",
+      "stylelint-scss"
+    ],
+  "rules": {
+    "prettier/prettier": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+  }
+}
