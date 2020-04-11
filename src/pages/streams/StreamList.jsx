@@ -54,9 +54,13 @@ const StreamList = () => {
         <Paper key={stream.id} style={{ padding: 10, boxShadow: 'none' }}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={8}>
-              <Typography variant="h5" component="h3">
-                {stream.title}
-              </Typography>
+              <Link
+                to={`/stream/watch/${stream.id}`}
+                style={{ textDecoration: 'none', color: '#000' }}>
+                <Typography variant="h5" component="h3">
+                  {stream.title}
+                </Typography>
+              </Link>
               <Typography component="p">{stream.description}</Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
