@@ -1,3 +1,6 @@
 body {
   margin: 0;
 }
+.MuiDrawer-paperAnchorLeft {
+  background-color: rgb(5, 31, 66) !important;
+}

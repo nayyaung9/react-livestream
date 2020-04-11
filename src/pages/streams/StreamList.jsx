@@ -9,6 +9,7 @@ import {
   Typography,
   Button,
   Avatar,
+  CardContent,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -58,34 +59,47 @@ const StreamList = () => {
   const renderStreams = () => {
     return streams.map(stream => {
       return (
-        <Grid item xs={6} sm={6} key={stream.id}>
-          <Paper style={{ padding: 10, height: '100%' }}>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          key={stream.id}
+          style={{ marginBottom: 20, position: 'relative' }}>
+          <Paper
+            style={{
+              padding: 10,
+              height: '100%',
+            }}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <Avatar src={stream.user.avatar_url} />
-              <Typography variant="h6" style={{ paddingLeft: 10 }}>
-                {stream.user.username}
+              <Typography
+                variant="h6"
+                style={{
+                  paddingLeft: 10,
+                }}>
+                {stream.user.username}{' '}
               </Typography>
             </div>
-            <Link
-              to={`/stream/watch/${stream.id}`}
-              style={{ textDecoration: 'none', color: '#000' }}>
+            <CardContent>
               <Typography variant="h6">{stream.title}</Typography>
-            </Link>
-            <Typography component="p">{stream.description}</Typography>
-            <Link
-              to={`/stream/watch/${stream.id}`}
-              style={{ textDecoration: 'none' }}>
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: 'rgb(5, 31, 66)',
-                  color: '#fff',
-                  marginRight: 10,
-                }}>
-                Watch Stream
-              </Button>
-            </Link>
-            {renderAuthUser(stream)}
+              <Typography component="p">{stream.description}</Typography>
+              <div style={{ position: 'absolute', bottom: 5 }}>
+                <Link
+                  to={`/stream/watch/${stream.id}`}
+                  style={{ textDecoration: 'none' }}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      backgroundColor: 'rgb(5, 31, 66)',
+                      color: '#fff',
+                      marginRight: 10,
+                    }}>
+                    Watch Stream
+                  </Button>
+                </Link>
+                {renderAuthUser(stream)}
+              </div>
+            </CardContent>
           </Paper>
         </Grid>
       );
@@ -114,14 +128,16 @@ const StreamList = () => {
 
   return (
     <AppWraper>
-      <Container style={{ marginTop: 40 }}>
+      <Container style={{ marginTop: 70 }}>
         <Grid
           container
           direction="row"
           justify="space-between"
           alignItems="center"
           style={{ marginBottom: 10 }}>
-          <Typography variant="h4">Current Streaming</Typography>
+          <Typography variant="h4" style={{ color: 'rgb(5, 31, 66)' }}>
+            Streamed Videos
+          </Typography>
           {renderButton()}
         </Grid>
         <Grid container spacing={3} direction="row" alignItems="stretch">
