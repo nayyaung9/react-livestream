@@ -8,11 +8,8 @@ import {
   FormControl,
   Button,
 } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { createStream } from '../../actions';
 
 const StreamForm = props => {
-  const dispatch = useDispatch();
   const { handleSubmit } = props;
 
   const renderError = ({ error, touched }) => {

@@ -51,6 +51,7 @@ class StreamWatch extends Component {
             controls={true}
           />
           <h3>{title}</h3>
+          <p>{description}</p>
         </Container>
       </AppWraper>
     );
