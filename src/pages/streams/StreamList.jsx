@@ -30,7 +30,7 @@ const StreamList = () => {
   const renderAuthUser = stream => {
     if (stream.userId === authUserId) {
       return (
-        <div>
+        <React.Fragment>
           <Link
             to={`/stream/edit/${stream.id}`}
             style={{ textDecoration: 'none' }}>
@@ -50,7 +50,7 @@ const StreamList = () => {
             onClick={() => onItemDelete(stream.id)}>
             Delete
           </Button>
-        </div>
+        </React.Fragment>
       );
     }
   };
@@ -58,30 +58,36 @@ const StreamList = () => {
   const renderStreams = () => {
     return streams.map(stream => {
       return (
-        <Paper key={stream.id} style={{ padding: 10, boxShadow: 'none' }}>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <Avatar src={stream.user.avatar_url} />
-            <Typography variant="h6" style={{ paddingLeft: 10 }}>
-              {stream.user.username}
-            </Typography>
-          </div>
-
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
-              <Link
-                to={`/stream/watch/${stream.id}`}
-                style={{ textDecoration: 'none', color: '#000' }}>
-                <Typography variant="h5" component="h3">
-                  {stream.title}
-                </Typography>
-              </Link>
-              <Typography component="p">{stream.description}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              {renderAuthUser(stream)}
-            </Grid>
-          </Grid>
-        </Paper>
+        <Grid item xs={6} sm={6} key={stream.id}>
+          <Paper style={{ padding: 10, height: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <Avatar src={stream.user.avatar_url} />
+              <Typography variant="h6" style={{ paddingLeft: 10 }}>
+                {stream.user.username}
+              </Typography>
+            </div>
+            <Link
+              to={`/stream/watch/${stream.id}`}
+              style={{ textDecoration: 'none', color: '#000' }}>
+              <Typography variant="h6">{stream.title}</Typography>
+            </Link>
+            <Typography component="p">{stream.description}</Typography>
+            <Link
+              to={`/stream/watch/${stream.id}`}
+              style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: 'rgb(5, 31, 66)',
+                  color: '#fff',
+                  marginRight: 10,
+                }}>
+                Watch Stream
+              </Button>
+            </Link>
+            {renderAuthUser(stream)}
+          </Paper>
+        </Grid>
       );
     });
   };
@@ -113,11 +119,14 @@ const StreamList = () => {
           container
           direction="row"
           justify="space-between"
-          alignItems="center">
+          alignItems="center"
+          style={{ marginBottom: 10 }}>
           <Typography variant="h4">Current Streaming</Typography>
           {renderButton()}
         </Grid>
-        {renderStreams()}
+        <Grid container spacing={3} direction="row" alignItems="stretch">
+          {renderStreams()}
+        </Grid>
       </Container>
     </AppWraper>
   );
